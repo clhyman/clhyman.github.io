@@ -1,6 +1,6 @@
 # clhyman.github.io
 <!DOCTYPE html>
-<html class="scripts-not-loaded" dir="ltr"   lang="en">
+
 <head>
   <meta charset="utf-8">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
