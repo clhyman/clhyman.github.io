@@ -10,6 +10,8 @@ var mymap = L.map('mapid').setView([40.819273, -96.702968], 16);
 //(12) note that each popup has preloaded text here. You could also have a variable that points attributes in a dataset to populate a popup; we will do this in the future
 	L.marker([40.819273, -96.702968]).addTo(mymap)
 		.bindPopup("<b>Hello world!</b><br />I open automatically.").openPopup();
+	L.marker([40.817804, -96.702572]).addTo(mymap)
+		.bindPopup("<b>This is Love Library</b><br />I open automatically.").openPopup();
 
 
 L.circle([40.82, -96.705], 200, {
