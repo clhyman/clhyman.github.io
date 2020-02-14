@@ -11,12 +11,7 @@ var mymap = L.map('mapid').setView([40.819273, -96.702968], 16);
 	L.marker([40.819273, -96.702968]).addTo(mymap)
 		.bindPopup("<b>Hello world!</b><br />I open automatically.").openPopup();
 
-	L.circle([40.819803, -96.703767], 200, {
-		color: 'green',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("I am a circle.");
-	//(13)notice that you can set the color of the outline by using major color names, as well as the fill color with hex codes
+
 L.circle([40.82, -96.705], 200, {
 		color: 'green',
 		fillColor: '#f03',
