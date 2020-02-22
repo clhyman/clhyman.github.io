@@ -26,6 +26,8 @@
 
       </style>
   </head>
+	  $.getJSON("https://github.com/clhyman/clhyman.github.io/blob/master/geoJson
+	  .done(function(data)   {
 
   <body>
       <div id="map"></div>
