@@ -1,88 +1,202 @@
 # clhyman.github.io
-<head>
-	<!--(1) This is the head section, where you set the title of the web page, link in any style sheets, 
-	and link to any javascript files/libraries you want to use in the web map-->
-	
-	<!-- (2) Notice how you can use the left angle bracket, exclamation and dashes to break the code and leave comments, 
-	but always make sure to close with two dashes and right angle bracket -->
-	<title>Quick Start - Leaflet</title>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>Lab 4</title>
 
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
 
-	<!--(3) style sheets are usually packaged or hosted online, but you could also download this file to your repository and reference it-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
-    
-	<!--(4) finally in the head, scripts themselves tell the web browser how to handle user-initiated events and draw map features-->
-	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+      <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+        integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+        crossorigin=""></script>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
+      <style>
+          html, body { margin: 0; padding: 0; height: 100%; }
+          #map { min-height: 100%; }
+
+      </style>
+  </head>
+
+  <body>
+      <div id="map"></div>
+
+      <script>
+          var map = L.map('map', {
+                center: [38.1625228, -96.9633171],
+                zoom: 4
+            });
+
+         L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+	maxZoom: 18,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}); 
+
+          //change the file name to yours
+            $.getJSON("https://clhyman.github.io/cases2.geojson")  // The getJSON() method is used to get JSON data
+            .done(function(data) {
+                var info = processData(data);
+                createPropSymbols(info.timestamps, data);
+				createSliderUI(info.timestamps);
+            });
+
+          function processData(data) {
+              // First, initialize the variables to hold the timestamps and min/max population values
+              var timestamps = [];  // square brackets to define an array of data
+                                    // because there are multiple timestamps
+              var	min = Infinity; // for the min, begin with the largest possible value - infinity
+              var	max = -Infinity;// for the max, begin with the smallest possible value - negative infinity
+
+              // Go through each row/feature of the data table
+              // Note data is the variable name in the function definition - processData(data)
+              for (var feature in data.features) {
+                  var properties = data.features[feature].properties;
+
+                  // At each row, go through the columns/attributes to get the values
+                  for (var attribute in properties) {
+                      if ( attribute != 'id' &&
+                           attribute != 'name' &&
+                           attribute != 'latitude' &&
+                           attribute != 'longitude' )   // != means NOT EQUAL TO
+                                                  // These three columns are NOT recorded
+                                                  // Modify this part when mapping your own data
+                      {
+                          if ( $.inArray(attribute,timestamps) ===  -1) { // JQuery in.Array() method searches for a specified value within an array and return its index (or -1 if not found)
+                                                            // here, the new timestamp is only added when it is not already in the array
+                                                            // triple equals === compares both type and value
+
+                              timestamps.push(attribute);  // The JS push() method adds new items to the end of an array
+                                                           // and returns the new length of the array
+                          }
+                          if (properties[attribute] < min) {
+                              min = properties[attribute]; // record/update the current smaller values as the min
+                          }
+                          if (properties[attribute] > max) {
+                              max = properties[attribute]; // record/update the current larger values as the max
+                          }
+                      }
+                  }
+              }
+              return {
+                  timestamps : timestamps,
+                  min : min,
+                  max : max
+              }
+            }
+
+          // The function to draw the proportional symbols
+            function createPropSymbols(timestamps, data) {
+
+              cities = L.geoJson(data, {
+
+                  // By default, Leaflet draws geojson points as simple markers
+                  // To alter this, the pointToLayer function needs to be used
+                  pointToLayer: function(feature, latlng) {
+                      return L.circleMarker(latlng, { // we use circle marker for the points
+                          fillColor: "#501e65",  // fill color of the circles
+                          color: '#501e65',      // border color of the circles
+                          weight: 2,             // circle line weight in pixels
+                          fillOpacity: 0.5       // fill opacity (0-1)
+                      }).on({
+                         mouseover: function(e) {
+                            this.openPopup();
+                            this.setStyle({fillColor: 'green'});  // fill color turns green when mouseover
+                        },
+                        mouseout: function(e) {
+                            this.closePopup();
+                            this.setStyle({fillColor: '#501e65'});  // fill turns original color when mouseout
+                        }
+                    });
+                  }
+              }).addTo(map);
+
+              updatePropSymbols(timestamps[0]); // this function is defined below
+                                              // When loaded, the map will first show proportional symbols with the first timestamp's data
+            }
+
+function createSliderUI(timestamps) {
+  var sliderControl = L.control({ position: 'bottomleft'} ); // position of the slider
+                    // Another use of L.control :)
+  sliderControl.onAdd = function(map) {
+    //initialize a range slider with mousedown control
+      var slider = L.DomUtil.create("input", "range-slider");
+      L.DomEvent.addListener(slider, 'mousedown', function(e) {
+          L.DomEvent.stopPropagation(e);
+      });
+
+    // Define the labels of the time slider as an array of strings
+    // Modify this for your data
+    var labels = ["1950", "1960","1970","1980", "1990", "2000","2010"];
+
+    $(slider)
+        .attr({
+          'type':'range',
+          'max': timestamps[timestamps.length-1],
+          'min':timestamps[0],
+          'step': 1, // Change this to match the numeric interval between adjacent timestamps
+          'value': String(timestamps[0])
+        })
+        .on('input change', function() {
+            updatePropSymbols($(this).val().toString()); // automatic update the map for the timestamp
+            var i = $.inArray(this.value,timestamps);
+            $(".temporal-legend").text(labels[i]); // automatic update the label for the timestamp
+        });
+    return slider;
+  }
+  sliderControl.addTo(map);
+  createTimeLabel("1950"); //The starting timestamp label
+  }
 
 
-	
-</head>
-<body>
-
-
-<!-- (5) a "div" is like a window; you're basically telling the browser to make a container here, size 600 by 400 -->
-<div id="mapid" style="width: 800px; height: 600px;"></div>
-
-<script>
-//(6) when you are outside of the head and outside of functions, you can use just two slashes to leave single-line comments like this and you don't need to close
-
-//(7) just below here you see "var," declaring mymap as a variable, then setting your map parameters. You can redefine features of a variable in your code as needed.
-//    you could actually name this anything "mymap," "kevin," "hammercheese," et cetera, as long as you call it up the same way each time throughout the code
-//(8) note that you might also see "const" used to identify variables in code, when you want a CONSTANT variable. Functionally, these will tend to work similarly in our work.
-// (9) here you define the longitude, latitude, and zoom level of the user map when they load the page, then follow with the tile layer you want (here it is mapbox)
-	
-	
-	var mymap = L.map('mapid').setView([40.819273, -96.702968], 16);
-	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		maxZoom: 19,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors '
-	}).addTo(mymap);
-//(10) right above here, you see you're adding this tileset and setting the max zoom level of "mymap" 
-
-//(11) this is how you define individual features on the map - a marker, a cirlce, a polygon. You could also call up a variable and point it to a hosted GIS file to load it in.
-//(12) note that each popup has preloaded text here. You could also have a variable that points attributes in a dataset to populate a popup; we will do this in the future
-	L.marker([40.819273, -96.702968]).addTo(mymap)
-		.bindPopup("<b>Hello world!</b><br />I open automatically.").openPopup();
-
-	L.circle([40.817, -96.71], 200, {
-		color: 'green',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("I am a circle.");
-	//(13)notice that you can set the color of the outline by using major color names, as well as the fill color with hex codes
-
-
-	L.polygon([
-		[40.819803, -96.703767],
-		[40.819787, -96.703247],
-		[40.819588, -96.703754]
-	]).addTo(mymap).bindPopup("I am a polygon.");
-	//(14)three nodes - the above code is drawing is a triangle... you can add more nodes to the polygon by separating each with a comma
-
-	//(15)here you could set the attributes of the popup instead of setting each to specific text
-	var popup = L.popup();
-
-	
-		var LoveLibrary = {
-    "type": "Feature",
-    "properties": {
-        "name": "Love Library",
-        "amenity": "Library",
-        "popupContent": "This is a library!"
-    },
-    "geometry": {
-        "type": "Point",
-        "coordinates": [-96.702572, 40.817804]
+  // Add labels to the time slider when the map first loaded
+  function createTimeLabel(startTimestamp) {
+    var temporalLegend = L.control({position: 'bottomleft' }); // same position as the slider
+                       // One more use of L.control !!
+    temporalLegend.onAdd = function(map) {
+      var output = L.DomUtil.create("output", "temporal-legend");
+      $(output).text(startTimestamp);
+      return output;
     }
-};
+    temporalLegend.addTo(map);
+  }
 
-//(16) you can also comment out mapped items if you do not want them to draw. note that the var reference above is still present but below i have turned off a layer
-//	L.geoJSON(LoveLibrary,{}).addTo(mymap);
+            // The function to update/resize each circle marker according to a value in the time series
+            function updatePropSymbols(timestamp) {
 
-//(17) think about how you would write some pop up text into your Love Library layer. Look at how it is done above. Read online help. Ask your neighbor. There are multiple approaches!
+              cities.eachLayer(function(layer) {  // eachLayer() is an Leaflet function to iterate over the layers/points of the map
 
-</script>
+                  var props = layer.feature.properties;   // attributes
+                  var radius = calcPropRadius(props[timestamp]); // circle radius, calculation function defined below
+
+                  // pop-up information (when mouseover) for each city is also defined here
+                 var popupContent = props.name + ' ' + timestamp + ' population: ' + String(props[timestamp]);
+
+                  layer.setRadius(radius);  // Leaflet method for setting the radius of a circle
+                  layer.bindPopup(popupContent, { offset: new L.Point(0,-radius) }); // bind the popup content, with an offset
+              });
+            }
+
+            // calculate the radius of the proportional symbols based on area
+            function calcPropRadius(attributeValue) {
+
+              var scaleFactor = 0.001;   // the scale factor is used to scale the values; the units of the radius are in meters
+                                         // you may determine the scale factor accordingly based on the range of the values and the mapping scale
+              var area = attributeValue * scaleFactor;
+
+              return Math.sqrt(area/Math.PI);  // the function return the radius of the circle to be used in the updatePropSymbols()
+            }
+
+
+      </script>
+
+  </body>
+</html>
