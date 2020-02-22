@@ -26,8 +26,7 @@
 
       </style>
   </head>
-	  $.getJSON("https://github.com/clhyman/clhyman.github.io/blob/master/geoJson
-	  .done(function(data)   {
+	  
 
   <body>
       <div id="map"></div>
@@ -42,7 +41,8 @@
 	maxZoom: 18,
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }); 
-
+$.getJSON("https://github.com/clhyman/clhyman.github.io/blob/master/geoJson
+	  .done(function(data)   {
           //change the file name to yours
             $.getJSON("https://clhyman.github.io/cases2.geojson")  // The getJSON() method is used to get JSON data
             .done(function(data) {
