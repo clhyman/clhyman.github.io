@@ -26,31 +26,61 @@
 
       </style>
   </head>
-	  
+  
+  <html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>Lab 4</title>
+
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+
+      <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+        integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+        crossorigin=""></script>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
+      <style>
+          html, body { margin: 0; padding: 0; height: 100%; }
+          #map { min-height: 100%; }
+
+      </style>
+  </head>
 
   <body>
       <div id="map"></div>
+
 
       <script>
           var map = L.map('map', {
                 center: [38.1625228, -96.9633171],
                 zoom: 4
             });
-
-         L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+	    
+var Stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
 	maxZoom: 18,
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}); 
-$.getJSON("https://github.com/clhyman/clhyman.github.io/blob/master/geoJson
-	  .done(function(data)   {
+	ext: 'png'
+});
+
           //change the file name to yours
-            $.getJSON("https://clhyman.github.io/cases2.geojson")  // The getJSON() method is used to get JSON data
-            .done(function(data) {
+            $.getJSON("https://github.com/clhyman/clhyman.github.io/blob/master/geoJson") 
                 var info = processData(data);
                 createPropSymbols(info.timestamps, data);
 				createSliderUI(info.timestamps);
             });
-
+ 
+ 
           function processData(data) {
               // First, initialize the variables to hold the timestamps and min/max population values
               var timestamps = [];  // square brackets to define an array of data
@@ -65,16 +95,13 @@ $.getJSON("https://github.com/clhyman/clhyman.github.io/blob/master/geoJson
 
                   // At each row, go through the columns/attributes to get the values
                   for (var attribute in properties) {
-                      if ( attribute != 'id' &&
-                           attribute != 'name' &&
-                           attribute != 'latitude' &&
-                           attribute != 'longitude' )   // != means NOT EQUAL TO
-                                                  // These three columns are NOT recorded
-                                                  // Modify this part when mapping your own data
-                      {
-                          if ( $.inArray(attribute,timestamps) ===  -1) { // JQuery in.Array() method searches for a specified value within an array and return its index (or -1 if not found)
-                                                            // here, the new timestamp is only added when it is not already in the array
-                                                            // triple equals === compares both type and value
+                      if ( attribute != 'province' &&
+                           attribute != 'POP' &&
+			   attribute !='SUSP_COUNT' &&
+                           attribute != 'LATITUDE' &&
+                           attribute != 'LONGITUDE' )   
+			   
+			
 
                               timestamps.push(attribute);  // The JS push() method adds new items to the end of an array
                                                            // and returns the new length of the array
