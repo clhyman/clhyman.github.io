@@ -60,7 +60,7 @@
 
       <script>
           var map = L.map('map', {
-                center: [38.1625228, -96.9633171],
+                center: [38.1625228, 110.9633171],
                 zoom: 4
             });
 	    
@@ -73,7 +73,8 @@ var Stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastl
 });
 
           //change the file name to yours
-            $.getJSON("https://github.com/clhyman/clhyman.github.io/blob/master/geoJson") 
+            $.getJSON("https://github.com/clhyman/clhyman.github.io/finalLab4.geojson")
+	        .done(function(data) {
                 var info = processData(data);
                 createPropSymbols(info.timestamps, data);
 				createSliderUI(info.timestamps);
