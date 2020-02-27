@@ -73,7 +73,7 @@ var Stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastl
 });
 
           //change the file name to yours
-            $.getJSON("https://github.com/clhyman/clhyman.github.io/finalLab4.geojson")
+            $.getJSON("https://clhyman.github.io/finalLab4.geojson")
 	        .done(function(data) {
                 var info = processData(data);
                 createPropSymbols(info.timestamps, data);
