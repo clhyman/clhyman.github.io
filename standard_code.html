@@ -69,7 +69,14 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
                            attribute != 'POP' &&
 			   attribute != 'SUSP_COUNT'
                            attribute != 'LATITUDE' &&
-                           attribute != 'LONGITUDE' )   // != means NOT EQUAL TO
+                           attribute != 'LONGITUDE' &&
+			   attribute != 'Day 1' &&
+			   attribute != 'Day 2' &&
+			   attribute != 'Day 3' &&
+			   attribute != 'Day 4' &&
+			   attribute != 'Day 5' &&
+			   attribute != 'Day 6' &&
+			   attribute != 'Day 7' &&  )   // != means NOT EQUAL TO
                                                   // These three columns are NOT recorded
                                                   // Modify this part when mapping your own data
                       {
