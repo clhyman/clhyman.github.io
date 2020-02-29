@@ -113,14 +113,14 @@
                   // To alter this, the pointToLayer function needs to be used
                   pointToLayer: function(feature, latlng) {
                       return L.circleMarker(latlng, { // we use circle marker for the points
-                          fillColor: "#501e65",  // fill color of the circles
-                          color: '#501e65',      // border color of the circles
-                          weight: 2,             // circle line weight in pixels
+                          fillColor: "	#FF7F50",  // fill color of the circles
+                          color: '#FF7F50',      // border color of the circles
+                          weight: 4,             // circle line weight in pixels
                           fillOpacity: 0.5       // fill opacity (0-1)
                       }).on({
                          mouseover: function(e) {
                             this.openPopup();
-                            this.setStyle({fillColor: 'green'});  // fill color turns green when mouseover
+                            this.setStyle({fillColor: 'coral'});  // fill color turns coral when mouseover
                         },
                         mouseout: function(e) {
                             this.closePopup();
