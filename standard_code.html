@@ -30,18 +30,19 @@
   <body>
       <div id="map"></div>
 
-
       <script>
           var map = L.map('map', {
-                center: [38.1625228, 110.9633171],
+                center: [38.1625228, -96.9633171],
                 zoom: 4
             });
-	    
-var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	maxZoom: 19,
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-});
 
+          L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
+            id: 'mapbox.light',
+            maxzoom: 4,
+            minzoom: 4,
+            accessToken: 'pk.eyJ1IjoiY3VyZW1hbmdvIiwiYSI6ImNpcTQ4cGFwbDAxbmVmd25vZGNiOTVzeGEifQ.GWZByYkIft6eMRha69C8nw'
+          }).addTo(map);
           //change the file name to yours
             $.getJSON("https://clhyman.github.io/finalLab4.geojson")
 	        .done(function(data) {
