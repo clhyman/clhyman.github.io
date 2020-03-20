@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <meta name="generator" content="" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+        <title>Lab 6 | CLHYMAN</title>
+        <style type="text/css">
+ html, body, #viewDiv {padding: 0; margin: 0; height: 100%; width: 100%;}
+</style>
+        <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css" type="text/css" />
+        <script src="https://js.arcgis.com/4.14/" type="text/javascript"></script>
+        <script type="text/javascript">
+
+   require(["esri/Map","esri/layers/TileLayer","esri/layers/GeoJSONLayer","esri/views/MapView","esri/layers/FeatureLayer", "esri/widgets/Legend"], function(Map, TileLayer, GeoJSONLayer, MapView, FeatureLayer, Legend) {
+const geojsonLayer = new GeoJSONLayer({
+var thebasemap = new TileLayer({url:"https://gisext.lincoln.ne.gov/arcgis/rest/services/GIS/LancoBasemap/MapServer/"})
+ renderer: renderer
+});
+   const renderer = {
+     type: "simple",
+field: "CNTASSDVAL",
+legendOptions: {title: "Assessed values in Lincoln"},
+symbol: {
+type: "simple-marker",
+color: "yellow",
+outline: {
+color: "black"
+ }
+},
+visualVariables: [
+{
+type: "size",
+field: "CNTASSDVAL",
+stops: [
+{
+value: 25000,
+size: "5px",
+label: "Under 25,000"
+},
+{
+value: 100000,
+size: "10px",
+label: "20,000 to 99,999"
+},
+{
+value: 500000,
+size: "15px",
+label: "100,000 to 500,000"
+ },
+{
+ value: 2500000,
+size: "25px",
+label: "Astronomical"
+}
+]
+}
+]
+};
+const legend = new Legend({
+view:view,
+layerInfos: [{
+layer: geojsonLayer,
+title: "Legend"
+}]
+});
+map.add(featureLayer);
+require(["esri/Map","esri/layers/TileLayer","esri/layers/GeoJSONLayer","esri/views/MapView","esri/layers/FeatureLayer"      ], function(Map, TileLayer, GeoJSONLayer, MapView, FeatureLayer) {
+
+
+   var featureLayer = new FeatureLayer({url:"https://gisext.lincoln.ne.gov/arcgis/rest/services/Parks/Park_Boundaries/MapServer/0"});
+view.ui.add(legend, "bottom-right");
+
+  var map = new Map({layers: [thebasemap, geojsonLayer]});
+
+   var view = new MapView({
+ container: "viewDiv",
+ map: map,
+   zoom: 17,
+     center: [-96.68, 40.81] // longitude, latitude � change this as needed
+  });
+
+   map.add(featureLayer); //added
+   }); //added
+
+</script>
+    </head>
+    <body>
+        <div id="viewDiv"></div>
+    </body>
+</html>
