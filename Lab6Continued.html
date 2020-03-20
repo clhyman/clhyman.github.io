@@ -12,14 +12,9 @@
         <script type="text/javascript">
 
    //require(["esri/Map","esri/layers/TileLayer","esri/layers/GeoJSONLayer","esri/views/MapView"], function(Map, TileLayer, GeoJSONLayer, MapView) {  
- require(["esri/Map","esri/layers/TileLayer","esri/layers/GeoJSONLayer","esri/views/MapView","esri/layers/FeatureLayer"      ], function(Map, TileLayer, GeoJSONLayer, MapView, FeatureLayer) {  
-
-
-   var featureLayer = new FeatureLayer({url:"https://gisext.lincoln.ne.gov/arcgis/rest/services/Parks/Park_Boundaries/MapServer/0"});
-    const geojsonLayer = new GeoJSONLayer({  
+const geojsonLayer = new GeoJSONLayer({  
 url: url,  
-copyright: “Rob Shepard”,
-renderer: renderer  
+ renderer: renderer  
 });
    const renderer = {
      type: "simple",
@@ -60,11 +55,8 @@ label: "Astronomical"
 ]            
 }          
 ]        
-};
-   const url = "https://opendata.arcgis.com/datasets/5aa5f17d117f409d8608ec1bf6de06d6_0.geojson";
-   var thebasemap = new TileLayer({url:"https://gisext.lincoln.ne.gov/arcgis/rest/services/GIS/LancoBasemap/MapServer/"});
-   const geojsonLayer = new GeoJSONLayer({url: url});
-   const legend = new Legend({
+};   
+const legend = new Legend({
 view:view,
 layerInfos: [{
 layer: geojsonLayer,
@@ -72,6 +64,10 @@ title: "Legend"
 }]
 });
 map.add(featureLayer);
+require(["esri/Map","esri/layers/TileLayer","esri/layers/GeoJSONLayer","esri/views/MapView","esri/layers/FeatureLayer"      ], function(Map, TileLayer, GeoJSONLayer, MapView, FeatureLayer) {  
+
+
+   var featureLayer = new FeatureLayer({url:"https://gisext.lincoln.ne.gov/arcgis/rest/services/Parks/Park_Boundaries/MapServer/0"});
 view.ui.add(legend, "bottom-right");
  
   var map = new Map({layers: [thebasemap, geojsonLayer]});      
