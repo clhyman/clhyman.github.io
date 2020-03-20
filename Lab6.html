@@ -10,26 +10,28 @@
         <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css" type="text/css" />
         <script src="https://js.arcgis.com/4.14/" type="text/javascript"></script>
         <script type="text/javascript">
-      
-require(["esri/Map", "esri/views/MapView"], function(Map, MapView) {
-  var map = new Map({          
-  var map = new Map({layers: [thebasemap, geojsonLayer]        });      
-    });     
+
+   //require(["esri/Map","esri/layers/TileLayer","esri/layers/GeoJSONLayer","esri/views/MapView"], function(Map, TileLayer, GeoJSONLayer, MapView) {  
+ require(["esri/Map","esri/layers/TileLayer","esri/layers/GeoJSONLayer","esri/views/MapView","esri/layers/FeatureLayer"      ], function(Map, TileLayer, GeoJSONLayer, MapView, FeatureLayer) {  
+
+
+   var featureLayer = new FeatureLayer({url:"https://gisext.lincoln.ne.gov/arcgis/rest/services/Parks/Park_Boundaries/MapServer/0"});
+   const url = "https://opendata.arcgis.com/datasets/5aa5f17d117f409d8608ec1bf6de06d6_0.geojson";
+   var thebasemap = new TileLayer({url:"https://gisext.lincoln.ne.gov/arcgis/rest/services/GIS/LancoBasemap/MapServer/"});
+   const geojsonLayer = new GeoJSONLayer({url: url});
+ 
+  var map = new Map({layers: [thebasemap, geojsonLayer]});      
+ 
    var view = new MapView({
  container: "viewDiv",
  map: map,
    zoom: 17,
      center: [-96.68, 40.81] // longitude, latitude � change this as needed
   });  
-   });
-     map.add(featureLayer);
-   require(["esri/Map","esri/layers/TileLayer","esri/layers/GeoJSONLayer","esri/views/MapView","esri/layers/FeatureLayer"      ], function(Map, TileLayer, GeoJSONLayer, MapView, FeatureLayer) {  
-   require(["esri/Map","esri/layers/TileLayer","esri/layers/GeoJSONLayer","esri/views/MapView"      ], function(Map, TileLayer, GeoJSONLayer, MapView) {  
-     var featureLayer = new FeatureLayer({  url:"https://gisext.lincoln.ne.gov/arcgis/rest/services/Parks/Park_Boundaries/MapServer/0"});
-   const url = "https://opendata.arcgis.com/datasets/5aa5f17d117f409d8608ec1bf6de06d6_0.geojson";
-   var thebasemap = new TileLayer({url:"https://gisext.lincoln.ne.gov/arcgis/rest/services/GIS/LancoBasemap/MapServer/"});
-   const geojsonLayer = new GeoJSONLayer({url: url,copyright: �GEOG 417/817�
-  
+   
+   map.add(featureLayer); //added
+   }); //added
+
 </script>
     </head>
     <body>
