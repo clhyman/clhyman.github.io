@@ -54,6 +54,18 @@
         zoom: 12     
         }) 
         });
-       
-</script>
+        </script>
+        <div id="map">
+  <script>
+  var layer = new ol.layer.Vector({     
+  source: new ol.source.Vector({         
+  features: 
+  [new ol.Feature({                 
+  geometry: new ol.geom.Point(ol.proj.fromLonLat([-96.6607, 40.8073]))            
+   })         
+   ]    
+  }) 
+    });
+     map.addLayer(layer);
+    </script>
 </html>
