@@ -14,25 +14,58 @@
   <body
   <div id="map"></div>
     <h2>My Map</h2>
-  <div id="mapdiv"></div>
-  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <div id="map" class="map">
+    <script type="text/javascript">
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([37.41, 8.82]),
+          zoom: 4
+        })
+      });
+    </script>
+    </body>
+  <div id="map" style="width: 600px; height: 400px;"></div>
   <script>
-    map = new OpenLayers.Map("mapdiv");
-    map.addLayer(new OpenLayers.Layer.OSM());
-
-    var lonLat = new OpenLayers.LonLat( -0.1279688 ,51.5077286 )
-          .transform(
-            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-            map.getProjectionObject() // to Spherical Mercator Projection
-          );
-          
-    var zoom=16;
-
-    var markers = new OpenLayers.Layer.Markers( "Markers" );
-    map.addLayer(markers);
-    
-    markers.addMarker(new OpenLayers.Marker(lonLat));
-    
-    map.setCenter (lonLat, zoom);
-  </script>
-</body></html>
+  var attribution = new ol.control.Attribution({
+  collapsible: false
+   });
+   var map = new ol.Map({
+   controls: ol.control.defaults({attribution: false}).extend([attribution]),
+  layers: [
+  new ol.layer.Tile({
+   source: new ol.source.OSM({
+   u
+   rl: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png,
+     attributions: [ ol.source.OSM.ATTRIBUTION, 'Christy Hyman' ],
+     maxZoom: 19
+     })
+      })
+       ],
+        target: 'map',     
+        view: new ol.View({         
+        center: ol.proj.fromLonLat([-96.6607, 40.8073]),         
+        maxZoom: 18,         
+        zoom: 12     
+        }) 
+        });
+        </script>
+        <div id="map">
+  <script>
+  var layer = new ol.layer.Vector({     
+  source: new ol.source.Vector({         
+  features: 
+  [new ol.Feature({                 
+  geometry: new ol.geom.Point(ol.proj.fromLonLat([-96.6607, 40.8073]))            
+   })         
+   ]    
+  }) 
+    });
+     map.addLayer(layer);
+    </script>
+</html>
