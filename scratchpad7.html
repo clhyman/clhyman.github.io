@@ -16,7 +16,6 @@
     <h2>My Map</h2>
     <div id="map" class="map">
     <script type="text/javascript">
-      <script>
       var map = new ol.Map({
         target: 'map',
         layers: [
@@ -32,7 +31,7 @@
     </script>
     </body>
   <div id="map" style="width: 600px; height: 400px;"></div>
-  <script>
+  <script type+"text/javascript">
   var attribution = new ol.control.Attribution({
   collapsible: false
    });
@@ -97,6 +96,6 @@
   });
   content.innerHTML = '<b>Hello world!</b><br />I am a popup.'; overlay.setPosition(ol.proj.fromLonLat([4.35247, 50.84673]));
 </div>
-    
+    </script>  
 </body>
 </html>
