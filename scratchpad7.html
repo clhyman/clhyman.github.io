@@ -42,8 +42,7 @@
   layers: [
   new ol.layer.Tile({
    source: new ol.source.OSM({
-   u
-   rl: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png,
+   url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png,
      attributions: [ ol.source.OSM.ATTRIBUTION, 'Christy Hyman' ],
      maxZoom: 19
      })
@@ -59,7 +58,7 @@
         map.addLayer(layer);
        var layer = new ol.layer.Vector({     
   source: new ol.source.Vector({         
-  features: 
+  features:[ 
   [new ol.Feature({                 
   geometry: new ol.geom.Point(ol.proj.fromLonLat([-96.6607, 40.8073]))            
    })         
