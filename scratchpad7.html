@@ -9,6 +9,7 @@
       }
     </style>
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/build/ol.js"></script>
+    <script src="http://openlayers.org/en/v3.18.2/build/ol.js"></script>
     <title>OpenLayers example</title>
   </head>
   <body
@@ -16,6 +17,7 @@
     <h2>My Map</h2>
     <div id="map" class="map">
     <script type="text/javascript">
+      <script>
       var map = new ol.Map({
         target: 'map',
         layers: [
@@ -54,10 +56,8 @@
         zoom: 12     
         }) 
         });
-        </script>
-        <div id="map">
-  <script>
-  var layer = new ol.layer.Vector({     
+        map.addLayer(layer);
+       var layer = new ol.layer.Vector({     
   source: new ol.source.Vector({         
   features: 
   [new ol.Feature({                 
@@ -66,6 +66,7 @@
    ]    
   }) 
     });
-     map.addLayer(layer);
+    
     </script>
+</body>
 </html>
