@@ -27,7 +27,7 @@
           .projection(projection);
       var g = svg.append("g");
       
-      d3.json("world-110m2.json", function(error, topology) {
+      d3.json("https://raw.githubusercontent.com/cszang/dendrobox/master/data/world-110m2.jsonworld-110m2.json", function(error, topology) {
           g.selectAll("path")
             .data(topojson.object(topology, topology.objects.countries)
                 .geometries)
