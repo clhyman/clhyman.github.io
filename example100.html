@@ -17,6 +17,9 @@ center: [35.10418, -106.62987],
 zoom: 10
 });
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x/{y}.png').addTo(map);
+var layer= new
+var tileUrl = 'https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=<insert-your-apikey-here>',
+layer = new L.TileLayer(tileUrl, {maxZoom: 18});
 </script>
 </body>
 </html>
