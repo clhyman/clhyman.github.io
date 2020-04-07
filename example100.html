@@ -11,13 +11,13 @@ integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIpt
     crossorigin=""></script>
 <div id="map" style="width: 600px; height: 400px"></div>
 <script>
-var map = L.map('map').setView([36.72, -76.58], 13);
+var map = L.map('map').setView([-76.58, 36.72], 13);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-L.marker([-37.72, -76.58]).addTo(map)
+L.marker([-76.58, 36.72]).addTo(map)
     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
     .openPopup();
 
