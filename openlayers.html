@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/css/ol.css" type="text/css">
+	<style>
+		.map {
+			height: 400px;
+			width: 100%;
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/build/ol.js"></script>
+	<title>OpenLayers example</title>
+</head>
+<body>
+	<div id="map" class="map"></div>
+	<div id="popup" class="ol-popup">
+	<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+	<div id="popup-content"></div>
+</div>
+	<script type="text/javascript">
+	var container = document.getElementById('popup');
+	var content = document.getElementById('popup-content');
+	var closer = document.getElementById('popup-closer');
+	var overlay = new ol.Overlay({
+		element: container,
+		  autoPan: true,
+		   autoPanAnimation: {
+			  duration: 250
+			}
+		})
+		map.addOverlay(overlay);
+	closer.onclick = function() {
+overlay.setPosition(undefined);
+		closer.blur();
+		return false;
+	};
+	map.on('singleclick', function (event) {
+		if (map.hasFeatureAtPixel(event.pixel) === true) {
+			var coordinate = event.coordinate;
+content.innerHTML = '<b>Hello world!</b><br />I am a popup.';
+					  overlay.setPosition(coordinate);
+						   } else {
+								overlay.setPosition(undefined);
+								closer.blur();
+								      }
+											 });
+		var map = new ol.Map({
+			target: 'map',
+			layers: [
+				new ol.layer.Tile({
+					source: new ol.source.OSM()
+				})
+			],
+			view: new ol.View({
+				center: ol.proj.fromLonLat([37.41, 8.82]),
+				zoom: 4
+			})
+		});
+		var attribution= new ol.control.Attribution({
+			collapsible: false
+		});
+		var map= new ol.Map({
+			controls: ol.control.defaults({attribution: false}).extend([attribution]),
+			layers: [
+				new. ol.layer.Tile({
+					source: new ol.source.OSM({
+						url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png,
+						attributions: [ol.source.OSM.ATTRIBUTION,'Christy Hyman'],
+						maxZoom: 19
+					})
+				})
+			],
+			target: 'map',
+			view: new ol.View({
+				center: ol.proj fromLonLat([]-96.6607, 40.8073]),
+				maxZoom: 18,
+				zoom: 12
+			})
+		});
+		var layer= new ol.layer.Vector({
+			source: new ol.source Vector
+			features:[
+				new ol.Features({
+					geometry: new ol.geom.Point(ol.prof.fromLonLat([-96.6607, 40.8073]))
+				})
+			]
+		})
+	});
+	</script>
+</body>
+</html>
