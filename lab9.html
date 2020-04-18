@@ -6,7 +6,8 @@
 </head>
 <body>
 	<script>
-	<script src="https://rshepard2.github.io/Lab9/data/lnkrds.js">
+	<script src="https://rshepard2.github.io/Lab9/data/lnkrds.js"></script>
+	<script>
 var width = 1000;
     var height = 600;
 		  var svg = d3.select("body")
@@ -19,8 +20,6 @@ var width = 1000;
 		.center( [0, 40.8497493] )
 		.translate( [width/2,height/2] );
   var geoPath = d3.geoPath()
-	.projection( albersProjection );
-	  .append("svg")
 	g.selectAll( "path" )
 .data( lnkrds.features )
 .enter()
@@ -28,7 +27,9 @@ var width = 1000;
 .attr( "fill", "#ccc" )
 .attr( "stroke", "#333")
 .attr( "d", geoPath );
-  </script>
+	.projection( albersProjection );
+	  .append("svg")
+</script>
 </body>
 </html>
 
