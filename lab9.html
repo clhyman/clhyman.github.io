@@ -21,6 +21,7 @@
 		.center( [0, 40.8497493] )
 		.translate( [width/2,height/2] );
   var geoPath = d3.geoPath()
+	.projection( albersProjection );
 	g.selectAll( "path" )
 .data( lnkrds.features )
 .enter()
@@ -28,7 +29,6 @@
 .attr( "fill", "#ccc" )
 .attr( "stroke", "#333")
 .attr( "d", geoPath );
-			.projection( albersProjection );
     .append("svg")
 </script>
 </body>
