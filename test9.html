@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>D3 Hello World</title>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      d3.select("body").append("p").text("Hello World");
+    </script>
+  </body>
+</html>
+The strength of D3.js, however, is in its data visualization ability. For example, it can be used to create charts. It can be used to create animated charts. It can be even used to integrate and animate different connected charts.
+
+D3 for Web Maps and Geographic Data Visualization
+But D3.js can be used for much more than just DOM manipulation, or to draw charts. D3.js is extremely powerful when it comes to handling geographical information. Manipulating and presenting geographic data can be very tricky, but building a map with a D3.js is quite simple.
+
+Here is a D3.js example that will draw a world map based on the data stored in a JSON-compatible data format. You just need to define the size of the map and the geographic projection to use (more about that later), define an SVG element, append it to the DOM, and load the map data using JSON. Map styling is done via CSS.
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>D3 World Map</title>
+    <style>
+      path {
+        stroke: white;
+        stroke-width: 0.5px;
+        fill: black;
+      }
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v0.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var width = 900;
+      var height = 600;
+
+      var projection = d3.geo.mercator();
+      
+      var svg = d3.select("body").append("svg")
+          .attr("width", width)
+          .attr("height", height);
+      var path = d3.geo.path()
+          .projection(projection);
+      var g = svg.append("g");
+      
+      d3.json("world-110m2.json", function(error, topology) {
+          g.selectAll("path")
+            .data(topojson.object(topology, topology.objects.countries)
+                .geometries)
+          .enter()
+            .append("path")
+            .attr("d", path)
+      });
+    </script>
+  </body>
+</html>
