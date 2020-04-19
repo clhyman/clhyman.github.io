@@ -30,13 +30,13 @@ fill: yellow;
 	<h1>Age of Northeast Lincoln Homes</h1>
 <h2></h2>
 	<script>
-	var width = 1000;
+var width = 1000;
     var height = 600;
 		var lowColor = '#f9f9f9' 
 		var highColor = '#bc2a66’
-		var minVal = 1900 
-		var maxVal = 2020
-		var ramp + d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor]);
+		var minVal = 1900
+		 var maxVal = 2020
+var ramp = d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor]);
 		  var svg = d3.select("body")
 			.append("svg")
 			.attr( "width", width )
@@ -74,6 +74,5 @@ d3.select("h2").text("");
 d3.select(this).attr("class","buildingdata");
 });
 </script>
-	</script>
 </body>
 </html>
