@@ -6,11 +6,6 @@
 <script src="https://rshepard2.github.io/Lab9/data/lnkrds.js"></script>
 <script src="https://rshepard2.github.io/Lab9/data/northeast_lnk_blds.js"></script>
 <style>
-var lowColor = '#f9f9f9' 
-var highColor = '#bc2a66’
-var minVal = 1900
-var maxVal = 2020
-var ramp = d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor]);
 body {
 position: absolute;
 font-family: "Proxima Nova", "Montserrat", sans-serif;
@@ -35,19 +30,19 @@ fill: yellow;
 	<h1>Age of Northeast Lincoln Homes</h1>
 <h2></h2>
 	<script>
-var width = 1000;
+	var width = 1000;
     var height = 600;
-	var svg = d3.select("body")
+		  var svg = d3.select("body")
 			.append("svg")
 			.attr( "width", width )
 			 .attr( "height", height );
-			 var g = svg.append( "g" );
-		var albersProjection = d3.geoAlbers()
+			var g = svg.append( "g" );
+				var albersProjection = d3.geoAlbers()
 		.scale( 2850000 )
 		.rotate( [96.6327,0] )
 		.center( [0, 40.8497493] )
 		.translate( [width/2,height/2] );
-  var geoPath = d3.geoPath()
+		var geoPath = d3.geoPath()
 	.projection( albersProjection );
 	g.selectAll( "path" )
 .data( lnkrds.features )
@@ -62,6 +57,7 @@ lnk_json.selectAll( "path" )
 .enter()
 .append( "path" )
 .attr ( "fill", function(d) { return ramp(d.properties.RESYRBLT) })
+
 .attr( "stroke", "#999" )
 .attr( "d", geoPath )
 .attr("class","buildingdata")
@@ -73,7 +69,13 @@ lnk_json.selectAll( "path" )
 d3.select("h2").text("");
 d3.select(this).attr("class","buildingdata");
 });
+var minVal = 1900
+var maxVal = 2020
+ var ramp = d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor]);
 </script>
+	</script>
 </body>
 </html>
+© 2020 GitHub, Inc.
+
 
