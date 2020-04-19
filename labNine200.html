@@ -49,8 +49,7 @@ fill: yellow;
 .data( lnkrds.features )
 .enter()
 .append( "path" )
-		var lowColor = '#f9f9f9' 
-		var highColor = '#bc2a66’
+		
 .attr( "fill", "#ccc" )
 .attr( "stroke", "#333")
 .attr( "d", geoPath );
@@ -72,6 +71,8 @@ lnk_json.selectAll( "path" )
 d3.select("h2").text("");
 d3.select(this).attr("class","buildingdata");
 });
+		var lowColor = '#f9f9f9' 
+		var highColor = '#bc2a66’
 var minVal = 1900
 var maxVal = 2020
  var ramp = d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor]);
