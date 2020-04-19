@@ -6,6 +6,11 @@
 <script src="https://rshepard2.github.io/Lab9/data/lnkrds.js"></script>
 <script src="https://rshepard2.github.io/Lab9/data/northeast_lnk_blds.js"></script>
 <style>
+var lowColor = '#f9f9f9' 
+var highColor = '#bc2a66’
+var minVal = 1900
+var maxVal = 2020
+var ramp = d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor]);
 body {
 position: absolute;
 font-family: "Proxima Nova", "Montserrat", sans-serif;
@@ -32,12 +37,7 @@ fill: yellow;
 	<script>
 var width = 1000;
     var height = 600;
-		var lowColor = '#f9f9f9' 
-		var highColor = '#bc2a66’
-		var minVal = 1900
-		 var maxVal = 2020
-var ramp = d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor]);
-		  var svg = d3.select("body")
+	var svg = d3.select("body")
 			.append("svg")
 			.attr( "width", width )
 			 .attr( "height", height );
@@ -76,3 +76,4 @@ d3.select(this).attr("class","buildingdata");
 </script>
 </body>
 </html>
+
