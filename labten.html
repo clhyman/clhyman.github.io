@@ -50,10 +50,74 @@ ambientOcclusionEnabled: true
 }
 }
 });
+var uniqueValueInfos = [
+{
+value: "Crataegus sp.",
+symbol: {
+type: "web-style",
+name: "Crataegus",
+styleName: "EsriRealisticTreesStyle"
+}
+},
+{ value: "Fraxinus pennsylvanica",
+symbol: {
+type: "web-style",
+name: "Fraxinus",
+styleName: "EsriRealisticTreesStyle"
+}
+},
+{
+value: "Picea abies",
+symbol: {
+type: "web-style",
+name: "Picea",
+styleName: "EsriRealisticTreesStyle"
+}
+},
+{
+value: "Gleditsia triacanthos",
+symbol: {
+type: "web-style",
+name: "Robinia",
+styleName: "EsriRealisticTreesStyle"
+}
+},
+{
+value: "Fagus grandifolia",
+symbol: {
+type: "web-style",
+name: "Fagus",
+styleName: "EsriRealisticTreesStyle"
+}
+},
+{
+value: "Quercus macrocarpa",
+symbol: { type: "web-style",
+name: "Quercus",
+styleName: "EsriRealisticTreesStyle"
+}
+},
+{
+value: "Pinus strobus",
+symbol: {
+type: "web-style",
+name: "Pinus",
+styleName: "EsriRealisticTreesStyle"
+}
+},
+{
+value: "Liriodendron tulipifera",
+symbol: {
+type: "web-style",
+name: "Philodendron",
+styleName: "EsriRealisticTreesStyle"
+}
+}
+];
 var vegetationLayer = new FeatureLayer({
-url: 
-"https://maps.facilities.uiowa.edu/arcgis/rest/services/Features/Trees/MapServer/1", 
-elevationInfo: {	
+url:
+"https://maps.facilities.uiowa.edu/arcgis/rest/services/Features/Trees/MapServer/1",
+elevationInfo: {
 mode: "on-the-ground"
 },
 renderer: {
@@ -74,11 +138,11 @@ axis: "height"
 {
 { type: "rotation",
 valueExpression: "random() * 360"
-}	
+}
 ]
 }
 });
-map.add( vegetationLayermap.add( 
+map.add( vegetationLayermap.add(
 vegetationLayer
 );
 });
@@ -88,3 +152,4 @@ vegetationLayer
 <div id="viewDiv"></div>
 </body>
 </html>
+
