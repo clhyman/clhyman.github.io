@@ -50,7 +50,38 @@ ambientOcclusionEnabled: true
 }
 }
 });
-
+var vegetationLayer = new FeatureLayer({
+url: 
+"https://maps.facilities.uiowa.edu/arcgis/rest/services/Features/Trees/MapServer/1", 
+elevationInfo: {	
+mode: "on-the-ground"
+},
+renderer: {
+type: "unique-value",
+field: "Scientific",
+defaultSymbol: {
+type: "web-style",
+name: "Unknown",
+},
+uniqueValueInfos: uniqueValueInfos,
+styleName: "EsriRealisticTreesStyle"
+visualVariables: [
+{
+type: "size",
+field: "Height",
+axis: "height"
+},
+{
+{ type: "rotation",
+valueExpression: "random() * 360"
+}	
+]
+}
+});
+map.add( vegetationLayermap.add( 
+vegetationLayer
+);
+});
 </script>
 </head>
 <body>
