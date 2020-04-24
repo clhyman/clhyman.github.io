@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>ArcGIS API for JavaScript Hello World App</title>
+  <title>Visualize features with realistic WebStyleSymbols - 4.14</title>
   <style>
     html, body, #viewDiv {
       padding: 0;
@@ -16,23 +16,31 @@
   <script src="https://js.arcgis.com/4.15/"></script>
 
   <script>
-    require([
-      "esri/Map",
-      "esri/views/MapView"
-    ], function(Map, MapView) {
-
-      var map = new Map({
-        basemap: "topo-vector"
-      });
-
-      var view = new MapView({
-        container: "viewDiv",
-        map: map,
-        center: [-118.71511,34.09042],
-        zoom: 11
-      });
-
-    });
+   require(["esri/WebScene","esri/views/SceneView","esri/layers/FeatureLayer",
+"esri/layers/SceneLayer","esri/tasks/support/Query"], function(WebScene, SceneView, FeatureLayer, SceneLayer, Query) {
+var map = new WebScene({
+basemap: "satellite",
+ground: "world-elevation"
+});
+var view = new SceneView({
+container: "viewDiv",
+map: map,
+camera: {
+position: {
+latitude: 41.6608232,
+longitude: -91.537668,
+z: 290
+},
+tilt: 60,
+heading: 330
+},
+environment: {
+lighting: {
+date: new Date("April 15, 2020 16:00:00 EDT"), directShadowsEnabled: true,
+ambientOcclusionEnabled: true
+}
+}
+}); 
   </script>
 </head>
 <body>
