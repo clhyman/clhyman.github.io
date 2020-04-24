@@ -16,3 +16,106 @@
  
 <script>
   var scene, view;
+  require([
+    "esri/WebScene",
+    "esri/views/SceneView",
+    "esri/layers/SceneLayer",
+    "esri/layers/FeatureLayer",
+    "esri/layers/GraphicsLayer",
+    "esri/geometry/Point",
+    "esri/geometry/Extent",
+    "esri/geometry/Multipoint",
+    "esri/geometry/geometryEngine",
+    "esri/PopupTemplate",
+    "esri/geometry/SpatialReference",
+    "esri/renderers/SimpleRenderer",
+    "esri/symbols/SimpleMarkerSymbol",
+      "esri/symbols/SimpleFillSymbol",
+    "esri/symbols/ObjectSymbol3DLayer",
+    "esri/symbols/IconSymbol3DLayer",
+    "esri/symbols/PointSymbol3D",
+    "esri/symbols/ExtrudeSymbol3DLayer",
+    "esri/symbols/PolygonSymbol3D",
+    "esri/tasks/QueryTask",
+    "esri/tasks/support/Query",
+    "esri/Graphic",
+    "esri/Camera",
+    "esri/request",
+    "esri/config",
+    "dojo/_base/array",
+    "dojo/domReady!"
+  ], function (WebScene, SceneView, SceneLayer, FeatureLayer, GraphicsLayer, Point, Extent, Multipoint, geometryEngine, PopupTemplate, SpatialReference, SimpleRenderer, SimpleMarkerSymbol, SimpleFillSymbol, ObjectSymbol3DLayer, IconSymbol3DLayer, PointSymbol3D, ExtrudeSymbol3DLayer, PolygonSymbol3D, QueryTask, Query, Graphic, Camera, esriRequest, esriConfig, arrayUtils){
+     
+    esriConfig.request.corsEnabledServers.push("http://earthquake.usgs.gov"); 
+    
+    var lastHour = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";  
+    var last24hrs = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+    var last7days = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+    var last30days = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
+   
+    var clippingExtent = new Extent({
+      xmax: -10749512,
+      xmin: -10923374,
+      ymax: 4352877,
+      ymin: 4260227,
+      spatialReference: new SpatialReference({
+        wkid: 3857   
+      })
+    });
+      
+    var cushingExtent = new Extent({
+      xmax: -10759799.11314836,
+      xmin: -10792753.531996163,
+      ymax: 4309292.284758761,
+      ymin: 4289717.311748945,
+      spatialReference: new SpatialReference({
+        wkid: 3857   
+      })
+    });  
+      
+    var worldExtent = new Extent({
+      xmax: 179,
+      xmin: -179,
+      ymax: 85,
+      ymin: -85,
+      spatialReference: new SpatialReference({
+        wkid: 4326   
+      })
+    });
+      
+    var pTemplate = new PopupTemplate({
+      title: "{title}",
+      content: "<b>Location:</b> {place}<br>" +
+        "<b>Date and time:</b> {time}<br>" +
+        "<b>Magnitude (0-10): </b> {mag}<br>" +
+        "<b>Intensity (1-10): </b> {mmi}<br>" +
+        "<b>Depth: </b> {depth} km<br>" +
+        "<b>Number who reported feeling the quake: </b> {felt}<br>" +
+        "<b>Significance: </b> {sig}<br><br>" +
+        "<a href='{url}'>View more information provided by the USGS</a>",
+      fieldInfos: [{
+        fieldName: "time",
+        format: {
+          dateFormat: "shortDateShortTime"
+        }
+      }, {
+        fieldName: "felt",
+        format: {
+          digitSeparator: true,
+          places: 0
+        }
+      }]
+    });
+      
+    var initCam = new Camera({
+      heading: 17.8,
+      tilt: 113.6,
+      position: new Point({
+        latitude: -35.729,
+        longitude: -96.925,
+        z: -20027, 
+        spatialReference: new SpatialReference({
+          wkid: 3857
+        })
+      })
+    });
