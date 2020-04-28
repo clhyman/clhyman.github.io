@@ -20,9 +20,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 L.marker([36.56, -76.45]).addTo(map)
     .bindPopup('THE GREAT DISMAL SWAMP!')
     .openPopup();
- $.getJSON(“https://clhyman.github.io/culturemapping.geojson”)              .done(function(data) {
-   var info = processData(data);4               
-	 })
+ var promise = $.getJSON("https://clhyman.github.io/culturemapping.geojson");
+    promise.then(function(data) {
+console.log(data) 
+    });
 
 </script>
 </body>
