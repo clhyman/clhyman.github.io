@@ -20,11 +20,333 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 L.marker([36.56, -76.45]).addTo(map)
     .bindPopup('THE GREAT DISMAL SWAMP!')
     .openPopup();
- var promise = $.getJSON("https://clhyman.github.io/culturemapping.geojson");
-    promise.then(function(data) {
-console.log(data) 
-    });
-
+ var geojsonFeature = {
+"type": "Feature",
+    "properties": {
+        "Name": "Okisko"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.354722,
+          36.259324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Spring Hill Church"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.158294,
+          36.041269
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Sawyers Creek Church"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.165487,
+          36.347656
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Mount Herman"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.329659,
+          36.261546
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Beacon Light Church"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.014444,
+          35.988056
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Indian Woods Church"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.069722,
+          35.968214
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Saint Francis Church"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.020278,
+          35.940437
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Camden"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.171876,
+          36.32849
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Hollister"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.935818,
+          36.255984
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Roquist Creek"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.914118,
+          35.953493
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Weeksville"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.147707,
+          36.205436
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Township of Indian Woods"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.058992,
+          35.975777
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Township of Mount Hermon"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.305398,
+          36.269345
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Township of Newland"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.409599,
+          36.405115
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Spring Hill Church Suffolk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.924732,
+          36.615972
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Providence"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.819452,
+          36.937363
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Dumpling Island"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.554395,
+          36.810149
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Skeetertown"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.579673,
+          36.660429
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Bowers Hill"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.412723,
+          36.786816
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Fentress"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.196881,
+          36.702094
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Hampton"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.345222,
+          37.029869
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Newport News"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.428003,
+          36.978759
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Portsmouth"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.298274,
+          36.835426
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Suffolk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.583562,
+          36.728205
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Fort Monroe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.304864,
+          37.005608
+        ]
+      }
+    }
+  ]
+}
 </script>
 </body>
 </html>
