@@ -20,7 +20,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 L.marker([36.56, -76.45]).addTo(map)
     .bindPopup('THE GREAT DISMAL SWAMP!')
     .openPopup();
- var geojsonFeature = {
+ var geojsonFeature = { 
+L.geoJSON(geojsonFeature).addTo(map);
 "type": "Feature",
     "properties": {
         "Name": "Okisko"
@@ -347,8 +348,6 @@ L.marker([36.56, -76.45]).addTo(map)
     }
   ]
 }
-L.geoJSON(geojsonFeature).addTo(map);
-
 </script>
 </body>
 </html>
