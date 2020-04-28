@@ -9,6 +9,7 @@ integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIpt
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
+  <script src= "https://clhyman.github.io/culturemapping.geojson"></script>
 <div id="map" style="width: 600px; height: 400px"></div>
 <script>
 var map = L.map('map').setView([36.56, -76.45], 13);
@@ -20,7 +21,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 L.marker([36.56, -76.45]).addTo(map)
     .bindPopup('THE GREAT DISMAL SWAMP!')
     .openPopup();
-
+  $.getJSON(“https://clhyman.github.io/culturemapping.geojson”)  
+  done(function(data) {
+  var info = processData(data);
+   })
 </script>
 </body>
 </html>
